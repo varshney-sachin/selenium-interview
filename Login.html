@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Login Page</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+        }
+
+        input {
+            display: block;
+            margin-bottom: 15px;
+            padding: 8px;
+            width: 250px;
+        }
+
+        input:disabled {
+            background-color: #eee;
+        }
+
+        button {
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .success {
+            color: green;
+            margin-top: 15px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Login</h2>
+
+<input type="text" id="username" placeholder="Username">
+<input type="password" id="password" placeholder="Password" disabled>
+
+<button id="submitBtn" disabled>Submit</button>
+
+<p id="successMsg" class="success">✅ Login Successful!</p>
+
+<script>
+    const username = document.getElementById("username");
+    const password = document.getElementById("password");
+    const submitBtn = document.getElementById("submitBtn");
+    const successMsg = document.getElementById("successMsg");
+
+    function validateForm() {
+        const isUsernameFilled = username.value.trim().length > 0;
+        const isPasswordFilled = password.value.trim().length > 0;
+
+        // Enable password only if username is entered
+        password.disabled = !isUsernameFilled;
+
+        // Enable submit only if both fields are filled
+        submitBtn.disabled = !(isUsernameFilled && isPasswordFilled);
+    }
+
+    username.addEventListener("input", validateForm);
+    password.addEventListener("input", validateForm);
+
+    submitBtn.addEventListener("click", function () {
+        successMsg.style.display = "block";
+    });
+</script>
+
+</body>
+</html>
